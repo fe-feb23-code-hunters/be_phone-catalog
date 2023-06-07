@@ -1,0 +1,25 @@
+{
+  "name": "be_phone-catalog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fe-feb23-code-hunters/be_phone-catalog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fe-feb23-code-hunters/be_phone-catalog/issues"
+  },
+  "homepage": "https://github.com/fe-feb23-code-hunters/be_phone-catalog#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2"
+  }
+}
