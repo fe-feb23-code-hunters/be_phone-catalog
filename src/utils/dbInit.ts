@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize-typescript";
+import { Sequelize } from 'sequelize-typescript';
 require('dotenv').config();
 
 const dbHost = process.env.DB_HOST;
@@ -8,21 +8,22 @@ const dbPassword = process.env.DB_PASSWORD;
 
 const URI = `postgres://${dbUser}:${dbPassword}@${dbHost}/${dbName}`;
 
-export const dbInit = () => {
+const dbInit = () => {
   try {
-    const db = new Sequelize(
-      URI,
-      {
-        dialectOptions: {
-          ssl: true,
-        }
-      }
-    );
+    const db = new Sequelize(URI, {
+      dialectOptions: {
+        ssl: true,
+      },
+    });
 
+    // eslint-disable-next-line no-console
     console.log('DB successfully initialized');
 
     return db;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log('DB failed to connect', error);
   }
-}
+};
+
+module.exports = dbInit;
