@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
+
 require('dotenv').config();
 
 const dbHost = process.env.DB_HOST;
@@ -26,4 +27,4 @@ const dbInit = () => {
   }
 };
 
-module.exports = dbInit;
+export default dbInit;
