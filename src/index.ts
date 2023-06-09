@@ -1,8 +1,9 @@
+import { dbInit } from './utils/dbInit';
+
 require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-const dbInit = require('./utils/dbInit');
 
 const PORT = process.env.PORT || 3000;
 
