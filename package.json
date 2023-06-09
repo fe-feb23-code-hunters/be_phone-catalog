@@ -12,9 +12,6 @@
     "*.(ts)": [
       "prettier --write",
       "npm run lint"
-    ],
-    "*.(scss)": [
-      "npm run stylelint"
     ]
   },
   "repository": {
