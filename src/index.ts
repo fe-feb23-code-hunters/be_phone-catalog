@@ -1,8 +1,9 @@
-require('dotenv').config();
+import express from 'express';
+import productRouter from './routes/productRouter';
+import cors from 'cors';
+import dbInit from './utils/dbInit';
 
-const express = require('express');
-const cors = require('cors');
-const dbInit = require('./utils/dbInit');
+require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
 
@@ -11,6 +12,8 @@ const app = express();
 dbInit();
 
 app.use(cors());
+
+app.use('/products', productRouter);
 
 app.get('/', (_req, res) => {
   res.send('Hello World, from express');
