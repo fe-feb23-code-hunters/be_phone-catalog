@@ -23,4 +23,4 @@ const dbInit = () => {
         console.log('DB failed to connect', error);
     }
 };
-module.exports = dbInit;
+exports.default = dbInit;

@@ -1,11 +1,18 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const productRouter_1 = __importDefault(require("./routes/productRouter"));
+const cors_1 = __importDefault(require("cors"));
+const dbInit_1 = __importDefault(require("./utils/dbInit"));
 require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const dbInit = require('./utils/dbInit');
 const PORT = process.env.PORT || 3000;
-const app = express();
-dbInit();
-app.use(cors());
+const app = (0, express_1.default)();
+(0, dbInit_1.default)();
+app.use((0, cors_1.default)());
+app.use('/products', productRouter_1.default);
 app.get('/', (_req, res) => {
     res.send('Hello World, from express');
 });
