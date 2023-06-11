@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import express from 'express';
 import productRouter from './routes/productRouter';
 import cors from 'cors';
 import { dbInit } from './utils/dbInit';
 
 require('dotenv').config();
+=======
+import { dbInit } from './utils/dbInit';
+
+require('dotenv').config();
+
+const express = require('express');
+const cors = require('cors');
+>>>>>>> 49a143cc93d895cd7f1d7c47748c86da96e34018
 
 const PORT = process.env.PORT || 3000;
 

@@ -22,6 +22,11 @@ export const dbInit = () => {
       },
     );
 
+    console.log(process.env.DB_NAME);
+    console.log(process.env.DB_USER);
+    console.log(process.env.DB_PASSWORD);
+    console.log(process.env.DB_HOST);
+
     console.log('DB successfully initialized');
 
     return db;
