@@ -1,7 +1,7 @@
 import express from 'express';
 import productRouter from './routes/productRouter';
 import cors from 'cors';
-import dbInit from './utils/dbInit';
+import { dbInit } from './utils/dbInit';
 
 require('dotenv').config();
 

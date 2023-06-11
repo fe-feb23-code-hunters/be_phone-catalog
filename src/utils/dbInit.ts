@@ -29,8 +29,3 @@ export const dbInit = () => {
     console.log('DB failed to connect', error);
   }
 };
-<<<<<<< HEAD
-
-export default dbInit;
-=======
->>>>>>> f09dbc3 (Create product and phone  tables)
