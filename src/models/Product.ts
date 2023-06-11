@@ -67,12 +67,6 @@ export class Product extends Model {
   @Column({
     type: DataType.STRING,
   })
-    screen: string;
-
-  @AllowNull(false)
-  @Column({
-    type: DataType.STRING,
-  })
     capacity: string;
 
   @AllowNull(false)
@@ -80,12 +74,6 @@ export class Product extends Model {
     type: DataType.STRING,
   })
     color: string;
-
-  @AllowNull(false)
-  @Column({
-    type: DataType.STRING,
-  })
-    ram: string;
 
   @AllowNull(false)
   @Column({

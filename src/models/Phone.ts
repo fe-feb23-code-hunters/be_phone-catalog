@@ -46,33 +46,9 @@ export class Phone extends Model {
 
   @AllowNull(false)
   @Column({
-    type: DataType.STRING,
-  })
-    capacity: string;
-
-  @AllowNull(false)
-  @Column({
-    type: DataType.INTEGER,
-  })
-    priceRegular: number;
-
-  @AllowNull(false)
-  @Column({
-    type: DataType.INTEGER,
-  })
-    priceDiscount: number;
-
-  @AllowNull(false)
-  @Column({
     type: DataType.ARRAY(DataType.STRING),
   })
     colorsAvailable: string[];
-
-  @AllowNull(false)
-  @Column({
-    type: DataType.STRING,
-  })
-    color: string;
 
   @AllowNull(false)
   @Column({
