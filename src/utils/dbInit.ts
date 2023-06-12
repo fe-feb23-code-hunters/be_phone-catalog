@@ -12,15 +12,12 @@ const URI = `postgres://${dbUser}:${dbPassword}@${dbHost}/${dbName}`;
 
 const dbInit = () => {
   try {
-    const db = new Sequelize(
-      URI,
-      {
-        models,
-        dialectOptions: {
-          ssl: true,
-        },
+    const db = new Sequelize(URI, {
+      models,
+      dialectOptions: {
+        ssl: true,
       },
-    );
+    });
 
     // eslint-disable-next-line no-console
     console.log('DB successfully initialized');
