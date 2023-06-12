@@ -10,6 +10,7 @@ const dbInit_1 = __importDefault(require("./utils/dbInit"));
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const app = (0, express_1.default)();
+app.use(express_1.default.static('public'));
 (0, dbInit_1.default)();
 app.use((0, cors_1.default)());
 app.use('/products', productRouter_1.default);
