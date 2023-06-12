@@ -1,4 +1,4 @@
-import { getAll } from '../models/productModel';
+import { getAll } from '../servises/productModel';
 
 export const getAllProducts = async(req, res) => {
   const page = parseInt(req.query.page) || 1;
