@@ -2,16 +2,14 @@ import { Phone } from '../models/Phone';
 import { Product } from '../models/Product';
 
 export async function getAll({ offset, limit }) {
-  const { rows: rawProducts, count: totalCount } = await Product
-    .findAndCountAll({
-      include: [{ model: Phone }],
-      offset,
-      limit,
-    });
+  const { rows: rawProducts, count: totalCount } = await
+  Product.findAndCountAll({
+    offset,
+    limit,
+  });
 
   const products = rawProducts.map(({ dataValues }) => ({
     ...dataValues,
-    phone: dataValues.phone.dataValues,
   }));
 
   return {
@@ -21,7 +19,9 @@ export async function getAll({ offset, limit }) {
 }
 
 export async function getById(id) {
-  const result = await Product.findByPk(id);
+  const result = await Product.findByPk(id, {
+    include: [{ model: Phone }],
+  });
 
   return result;
 }

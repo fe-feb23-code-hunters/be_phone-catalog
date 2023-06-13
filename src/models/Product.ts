@@ -85,5 +85,17 @@ export class Product extends Model {
   @Column({
     type: DataType.STRING,
   })
+    screen: string;
+
+  @AllowNull(false)
+  @Column({
+    type: DataType.STRING,
+  })
+    ram: string;
+
+  @AllowNull(false)
+  @Column({
+    type: DataType.STRING,
+  })
     image: string;
 }
