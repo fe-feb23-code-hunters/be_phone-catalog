@@ -1,19 +1,17 @@
 {
-    "id": "apple-iphone-11-256gb-white",
-	"namespaceId": "apple-iphone-11",
-	"name": "Apple iPhone 11 256GB White",
-	"capacityAvailable": ["64GB", "128GB", "256GB"],
-	"capacity": "256GB",
-	"priceRegular": 1172,
-	"priceDiscount": 1115,
-	"colorsAvailable": ["black", "green", "yellow", "white", "purple", "red"],
-	"color": "white",
+    "id": "apple-iphone-11-pro-512gb-silver",
+	"namespaceId": "apple-iphone-11-pro",
+	"name": "Apple iPhone 11 Pro 512GB Silver",
+	"capacityAvailable": ["64GB", "256GB", "512GB"],
+	"capacity": "512GB",
+	"priceRegular": 1880,
+	"priceDiscount": 1780,
+	"colorsAvailable": ["spacegray", "midnightgreen", "gold", "silver"],
+	"color": "silver",
 	"images": [
-		"img/phones/apple-iphone-11/white/00.jpg",
-		"img/phones/apple-iphone-11/white/01.jpg",
-		"img/phones/apple-iphone-11/white/02.jpg",
-		"img/phones/apple-iphone-11/white/03.jpg",
-		"img/phones/apple-iphone-11/white/04.jpg"
+		"img/phones/apple-iphone-11-pro/silver/00.jpg",
+		"img/phones/apple-iphone-11-pro/silver/01.jpg",
+		"img/phones/apple-iphone-11-pro/silver/02.jpg"
 	],
 	"description": [
 		{
@@ -36,11 +34,11 @@
 			]
 		}
 	],
-	"screen": "6.1' IPS",
-	"resolution": "1792x828",
+	"screen": "5.8' OLED",
+	"resolution": "2436х1125",
 	"processor": "Apple A13 Bionic",
 	"ram": "4GB",
 	"camera": "12 Mp + 12 Mp + 12MP",
-	"zoom": "Digital, 5x",
+	"zoom": "Digital, 10x / Optical, 2x",
 	"cell": ["GPRS", "EDGE", "WCDMA", "UMTS", "HSPA", "LTE"]
 }

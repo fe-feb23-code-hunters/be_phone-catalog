@@ -46,6 +46,8 @@ const seedInitialProducts = async() => {
     const productsFileContent = fs.readFileSync(productsFilePath, 'utf-8');
     const productsData = JSON.parse(productsFileContent);
 
+    console.log(productsData);
+
     await Product.bulkCreate(productsData);
   } catch (error) {
     console.log('Error seeding data:', error);
