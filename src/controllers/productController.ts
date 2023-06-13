@@ -1,4 +1,4 @@
-import { getAll } from '../servises/productService';
+import { getAll, getById } from '../servises/productService';
 
 export const getAllProducts = async(req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -29,6 +29,25 @@ export const getAllProducts = async(req, res) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error retrieving products:', error);
+
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const getProductById = async(req, res) => {
+  const { productId } = req.params;
+
+  try {
+    const product = await getById(productId);
+
+    if (!product) {
+      return res.sendStatus(404);
+    }
+
+    return res.send(product);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error retrieving product:', error);
 
     return res.status(500).json({ error: 'Internal server error' });
   }

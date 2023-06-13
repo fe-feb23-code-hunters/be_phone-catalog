@@ -19,3 +19,9 @@ export async function getAll({ offset, limit }) {
     count: totalCount,
   };
 }
+
+export async function getById(id) {
+  const result = await Product.findByPk(id);
+
+  return result;
+}
