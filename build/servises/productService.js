@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getById = exports.getAll = void 0;
+exports.getById = exports.getRecommended = exports.getAll = void 0;
+const sequelize_1 = require("sequelize");
 const Phone_1 = require("../models/Phone");
 const Product_1 = require("../models/Product");
 function getAll({ offset, limit }) {
@@ -26,6 +27,25 @@ function getAll({ offset, limit }) {
     });
 }
 exports.getAll = getAll;
+function getRecommended(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const rawProducts = yield Product_1.Product.findAll({
+            where: {
+                id: {
+                    [sequelize_1.Op.ne]: id,
+                },
+            },
+            order: sequelize_1.Sequelize.literal('random()'),
+            limit: 5,
+        });
+        const products = rawProducts.map(({ dataValues }) => (Object.assign({}, dataValues)));
+        return {
+            rows: products,
+            count: products.length,
+        };
+    });
+}
+exports.getRecommended = getRecommended;
 function getById(id) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = yield Product_1.Product.findByPk(id, {
