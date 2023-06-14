@@ -1,3 +1,4 @@
+import { Sequelize, Op } from 'sequelize';
 import { Phone } from '../models/Phone';
 import { Product } from '../models/Product';
 
@@ -15,6 +16,27 @@ export async function getAll({ offset, limit }) {
   return {
     rows: products,
     count: totalCount,
+  };
+}
+
+export async function getRecommended(id) {
+  const rawProducts = await Product.findAll({
+    where: {
+      id: {
+        [Op.ne]: id,
+      },
+    },
+    order: Sequelize.literal('random()'),
+    limit: 5,
+  });
+
+  const products = rawProducts.map(({ dataValues }) => ({
+    ...dataValues,
+  }));
+
+  return {
+    rows: products,
+    count: products.length,
   };
 }
 
