@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProductById = exports.getAllProducts = void 0;
+exports.getProductById = exports.getRecommendedProducts = exports.getAllProducts = void 0;
 const productService_1 = require("../servises/productService");
 const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const page = parseInt(req.query.page) || 1;
@@ -39,6 +39,25 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.getAllProducts = getAllProducts;
+const getRecommendedProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { productId } = req.params;
+    try {
+        const product = yield (0, productService_1.getById)(productId);
+        if (!product) {
+            return res.sendStatus(404);
+        }
+        const { rows: products } = yield (0, productService_1.getRecommended)(productId);
+        return res.json({
+            products,
+        });
+    }
+    catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error retrieving products:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+});
+exports.getRecommendedProducts = getRecommendedProducts;
 const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { productId } = req.params;
     try {
