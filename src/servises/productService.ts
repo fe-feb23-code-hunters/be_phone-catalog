@@ -27,7 +27,23 @@ export async function getRecommended(id) {
       },
     },
     order: Sequelize.literal('random()'),
-    limit: 5,
+    limit: 8,
+  });
+
+  const products = rawProducts.map(({ dataValues }) => ({
+    ...dataValues,
+  }));
+
+  return {
+    rows: products,
+    count: products.length,
+  };
+}
+
+export async function getNew() {
+  const rawProducts = await Product.findAll({
+    order: Sequelize.literal('random()'),
+    limit: 8,
   });
 
   const products = rawProducts.map(({ dataValues }) => ({
