@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProductById = exports.getRecommendedProducts = exports.getAllProducts = void 0;
+exports.getProductById = exports.getNewProducts = exports.getRecommendedProducts = exports.getAllProducts = void 0;
 const productService_1 = require("../servises/productService");
 const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const page = parseInt(req.query.page) || 1;
@@ -58,6 +58,20 @@ const getRecommendedProducts = (req, res) => __awaiter(void 0, void 0, void 0, f
     }
 });
 exports.getRecommendedProducts = getRecommendedProducts;
+const getNewProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const products = yield (0, productService_1.getNew)();
+        return res.json({
+            products,
+        });
+    }
+    catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error retrieving products:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+});
+exports.getNewProducts = getNewProducts;
 const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { productId } = req.params;
     try {
