@@ -60,7 +60,7 @@ const getRecommendedProducts = (req, res) => __awaiter(void 0, void 0, void 0, f
 exports.getRecommendedProducts = getRecommendedProducts;
 const getNewProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const products = yield (0, productService_1.getNew)();
+        const { rows: products } = yield (0, productService_1.getNew)();
         return res.json({
             products,
         });

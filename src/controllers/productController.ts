@@ -64,7 +64,7 @@ export const getRecommendedProducts = async(req, res) => {
 
 export const getNewProducts = async(req, res) => {
   try {
-    const products = await getNew();
+    const { rows: products } = await getNew();
 
     return res.json({
       products,
