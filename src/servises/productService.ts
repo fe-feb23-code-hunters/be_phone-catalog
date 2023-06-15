@@ -56,6 +56,22 @@ export async function getNew() {
   };
 }
 
+export async function getWithDiscount() {
+  const rawProducts = await Product.findAll({
+    order: [['price', 'ASC']],
+    limit: 8,
+  });
+
+  const products = rawProducts.map(({ dataValues }) => ({
+    ...dataValues,
+  }));
+
+  return {
+    rows: products,
+    count: products.length,
+  };
+}
+
 export async function getById(id) {
   const result = await Product.findByPk(id, {
     include: [{ model: Phone }],
