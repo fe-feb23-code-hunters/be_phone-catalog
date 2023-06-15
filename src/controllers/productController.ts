@@ -1,4 +1,9 @@
-import { getAll, getRecommended, getById } from '../servises/productService';
+import {
+  getAll,
+  getRecommended,
+  getById,
+  getNew,
+} from '../servises/productService';
 
 export const getAllProducts = async(req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -45,6 +50,21 @@ export const getRecommendedProducts = async(req, res) => {
     }
 
     const { rows: products } = await getRecommended(productId);
+
+    return res.json({
+      products,
+    });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error retrieving products:', error);
+
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const getNewProducts = async(req, res) => {
+  try {
+    const products = await getNew();
 
     return res.json({
       products,
