@@ -42,7 +42,7 @@ export async function getRecommended(id) {
 
 export async function getNew() {
   const rawProducts = await Product.findAll({
-    order: Sequelize.literal('random()'),
+    order: [['year', 'DESC']],
     limit: 8,
   });
 
