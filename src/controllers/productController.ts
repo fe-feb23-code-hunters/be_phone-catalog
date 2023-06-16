@@ -10,17 +10,9 @@ import {
 
 export const getAllProducts = async(req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit);
+  const limit = parseInt(req.query.limit) || 10;
   const productCategory = req.query.category;
   const sortBy = req.query.sortBy;
-
-  if (isNaN(limit)) {
-    return res.status(400).send('Limit should be type of number');
-  }
-
-  if (limit <= 0) {
-    return res.status(400).send('Limit should be at least 1');
-  }
 
   if (productCategory && !VALID_CATEGORIES.includes(productCategory)) {
     return res
