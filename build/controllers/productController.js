@@ -10,18 +10,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getProductById = exports.getProductsWithDiscount = exports.getNewProducts = exports.getRecommendedProducts = exports.getAllProducts = void 0;
+const categories_constants_1 = require("../constants/categories.constants");
 const productService_1 = require("../servises/productService");
 const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
+    const productCategory = req.query.category;
     if (limit < 0) {
         return res.status(400).send('Limit should be min 1');
     }
+    if (productCategory && !categories_constants_1.VALID_CATEGORIES.includes(productCategory)) {
+        return res.status(400).send(`The category must be one of the types: ${categories_constants_1.VALID_CATEGORIES.join(', ')}`);
+    }
     const offset = (page - 1) * limit;
     try {
-        const { rows: products, count } = yield (0, productService_1.getAll)({ offset, limit });
+        const { rows: products, count } = yield (0, productService_1.getAll)({
+            offset,
+            limit,
+            productCategory,
+        });
         const totalPages = Math.ceil(count / limit);
-        if (page <= 0 || page > totalPages) {
+        if (page <= 0 || (page > totalPages && totalPages !== 0)) {
             return res
                 .status(400)
                 .send(`The page index should be between min: 1 and max: ${totalPages}`);

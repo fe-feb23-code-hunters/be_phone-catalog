@@ -1,3 +1,4 @@
+import { VALID_CATEGORIES } from '../constants/categories.constants';
 import {
   getAll,
   getRecommended,
@@ -9,19 +10,28 @@ import {
 export const getAllProducts = async(req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
+  const productCategory = req.query.category;
 
   if (limit < 0) {
     return res.status(400).send('Limit should be min 1');
   }
 
+  if (productCategory && !VALID_CATEGORIES.includes(productCategory)) {
+    return res.status(400).send(`The category must be one of the types: ${VALID_CATEGORIES.join(', ')}`);
+  }
+
   const offset = (page - 1) * limit;
 
   try {
-    const { rows: products, count } = await getAll({ offset, limit });
+    const { rows: products, count } = await getAll({
+      offset,
+      limit,
+      productCategory,
+    });
 
     const totalPages = Math.ceil(count / limit);
 
-    if (page <= 0 || page > totalPages) {
+    if (page <= 0 || (page > totalPages && totalPages !== 0)) {
       return res
         .status(400)
         .send(`The page index should be between min: 1 and max: ${totalPages}`);
