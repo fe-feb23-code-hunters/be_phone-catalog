@@ -1,13 +1,21 @@
 import { Sequelize, Op } from 'sequelize';
 import { Phone } from '../models/Phone';
 import { Product } from '../models/Product';
+import { ProductCategory } from '../types/productCategory';
 
-export async function getAll({ offset, limit }) {
-  const { rows: rawProducts, count: totalCount } = await
-  Product.findAndCountAll({
-    offset,
-    limit,
-  });
+export async function getAll({ offset, limit, productCategory }) {
+  const where: { category?: ProductCategory } = {};
+
+  if (productCategory) {
+    where.category = productCategory;
+  }
+
+  const { rows: rawProducts, count: totalCount }
+    = await Product.findAndCountAll({
+      where,
+      offset,
+      limit,
+    });
 
   const products = rawProducts.map(({ dataValues }) => ({
     ...dataValues,
