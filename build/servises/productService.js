@@ -49,7 +49,7 @@ exports.getRecommended = getRecommended;
 function getNew() {
     return __awaiter(this, void 0, void 0, function* () {
         const rawProducts = yield Product_1.Product.findAll({
-            order: sequelize_1.Sequelize.literal('random()'),
+            order: [['year', 'DESC']],
             limit: 8,
         });
         const products = rawProducts.map(({ dataValues }) => (Object.assign({}, dataValues)));
