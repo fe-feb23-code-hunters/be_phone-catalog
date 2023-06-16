@@ -13,16 +13,39 @@ exports.getById = exports.getWithDiscount = exports.getNew = exports.getRecommen
 const sequelize_1 = require("sequelize");
 const Phone_1 = require("../models/Phone");
 const Product_1 = require("../models/Product");
-function getAll({ offset, limit, productCategory }) {
+const SortBy_1 = require("../types/SortBy");
+function getAll({ offset, limit, productCategory, sortBy }) {
     return __awaiter(this, void 0, void 0, function* () {
         const where = {};
+        let order = [];
         if (productCategory) {
             where.category = productCategory;
+        }
+        if (sortBy) {
+            switch (sortBy) {
+                case SortBy_1.SortBy.NEWEST: {
+                    order = [['year', 'DESC']];
+                    break;
+                }
+                case SortBy_1.SortBy.OLDEST: {
+                    order = [['year', 'ASC']];
+                    break;
+                }
+                case SortBy_1.SortBy.HIGH_PRICE: {
+                    order = [['price', 'DESC']];
+                    break;
+                }
+                case SortBy_1.SortBy.LOW_PRICE: {
+                    order = [['price', 'ASC']];
+                    break;
+                }
+            }
         }
         const { rows: rawProducts, count: totalCount } = yield Product_1.Product.findAndCountAll({
             where,
             offset,
             limit,
+            order,
         });
         const products = rawProducts.map(({ dataValues }) => (Object.assign({}, dataValues)));
         return {

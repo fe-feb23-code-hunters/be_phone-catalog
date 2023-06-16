@@ -1,4 +1,5 @@
 import { VALID_CATEGORIES } from '../constants/categories.constants';
+import { VALID_SORTBY } from '../constants/sortby.constants';
 import {
   getAll,
   getRecommended,
@@ -9,15 +10,30 @@ import {
 
 export const getAllProducts = async(req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 10;
+  const limit = parseInt(req.query.limit);
   const productCategory = req.query.category;
+  const sortBy = req.query.sortBy;
 
-  if (limit < 0) {
-    return res.status(400).send('Limit should be min 1');
+  if (isNaN(limit)) {
+    return res.status(400).send('Limit should be type of number');
+  }
+
+  if (limit <= 0) {
+    return res.status(400).send('Limit should be at least 1');
   }
 
   if (productCategory && !VALID_CATEGORIES.includes(productCategory)) {
-    return res.status(400).send(`The category must be one of the types: ${VALID_CATEGORIES.join(', ')}`);
+    return res
+      .status(400)
+      .send(
+        `The category must be one of the types: ${VALID_CATEGORIES.join(', ')}`,
+      );
+  }
+
+  if (sortBy && !VALID_SORTBY.includes(sortBy)) {
+    return res
+      .status(400)
+      .send(`The filter must be one of the types: ${VALID_SORTBY.join(', ')}`);
   }
 
   const offset = (page - 1) * limit;
@@ -27,6 +43,7 @@ export const getAllProducts = async(req, res) => {
       offset,
       limit,
       productCategory,
+      sortBy,
     });
 
     const totalPages = Math.ceil(count / limit);

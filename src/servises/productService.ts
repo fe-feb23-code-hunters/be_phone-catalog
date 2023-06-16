@@ -2,12 +2,38 @@ import { Sequelize, Op } from 'sequelize';
 import { Phone } from '../models/Phone';
 import { Product } from '../models/Product';
 import { ProductCategory } from '../types/productCategory';
+import { SortBy } from '../types/SortBy';
 
-export async function getAll({ offset, limit, productCategory }) {
+export async function getAll({ offset, limit, productCategory, sortBy }) {
   const where: { category?: ProductCategory } = {};
+  let order: Array<[string, 'DESC' | 'ASC']> = [];
 
   if (productCategory) {
     where.category = productCategory;
+  }
+
+  if (sortBy) {
+    switch (sortBy) {
+      case SortBy.NEWEST: {
+        order = [['year', 'DESC']];
+        break;
+      }
+
+      case SortBy.OLDEST: {
+        order = [['year', 'ASC']];
+        break;
+      }
+
+      case SortBy.HIGH_PRICE: {
+        order = [['price', 'DESC']];
+        break;
+      }
+
+      case SortBy.LOW_PRICE: {
+        order = [['price', 'ASC']];
+        break;
+      }
+    }
   }
 
   const { rows: rawProducts, count: totalCount }
@@ -15,6 +41,7 @@ export async function getAll({ offset, limit, productCategory }) {
       where,
       offset,
       limit,
+      order,
     });
 
   const products = rawProducts.map(({ dataValues }) => ({
