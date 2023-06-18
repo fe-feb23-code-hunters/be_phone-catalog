@@ -13,6 +13,7 @@ export const getAllProducts = async(req, res) => {
   const limit = parseInt(req.query.limit) || 10;
   const productCategory = req.query.category;
   const sortBy = req.query.sortBy;
+  const search = req.query.search;
 
   if (productCategory && !VALID_CATEGORIES.includes(productCategory)) {
     return res
@@ -36,6 +37,7 @@ export const getAllProducts = async(req, res) => {
       limit,
       productCategory,
       sortBy,
+      search,
     });
 
     const totalPages = Math.ceil(count / limit);

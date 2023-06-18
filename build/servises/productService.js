@@ -14,12 +14,15 @@ const sequelize_1 = require("sequelize");
 const Phone_1 = require("../models/Phone");
 const Product_1 = require("../models/Product");
 const SortBy_1 = require("../types/SortBy");
-function getAll({ offset, limit, productCategory, sortBy }) {
+function getAll({ offset, limit, productCategory, sortBy, search, }) {
     return __awaiter(this, void 0, void 0, function* () {
         const where = {};
         let order = [];
         if (productCategory) {
             where.category = productCategory;
+        }
+        if (search) {
+            where.name = { [sequelize_1.Op.iLike]: `%${search}%` };
         }
         if (sortBy) {
             switch (sortBy) {
