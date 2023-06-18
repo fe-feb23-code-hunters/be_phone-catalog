@@ -105,9 +105,10 @@ function getWithDiscount() {
     });
 }
 exports.getWithDiscount = getWithDiscount;
-function getById(id) {
+function getById(itemId) {
     return __awaiter(this, void 0, void 0, function* () {
-        const result = yield Product_1.Product.findByPk(id, {
+        const result = yield Product_1.Product.findOne({
+            where: { itemId },
             include: [{ model: Phone_1.Phone }],
         });
         return result;
