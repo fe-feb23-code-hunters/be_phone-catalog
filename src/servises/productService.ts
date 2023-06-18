@@ -13,7 +13,7 @@ export async function getAll({
 }) {
   const where: {
     category?: ProductCategory;
-    name?: { [Op.iLike]: string }
+    name?: { [Op.iLike]: string };
   } = {};
 
   let order: Array<[string, 'DESC' | 'ASC']> = [];
@@ -51,12 +51,12 @@ export async function getAll({
   }
 
   const { rows: rawProducts, count: totalCount }
-  = await Product.findAndCountAll({
-    where,
-    offset,
-    limit,
-    order,
-  });
+    = await Product.findAndCountAll({
+      where,
+      offset,
+      limit,
+      order,
+    });
 
   const products = rawProducts.map(({ dataValues }) => ({
     ...dataValues,
@@ -121,8 +121,9 @@ export async function getWithDiscount() {
   };
 }
 
-export async function getById(id) {
-  const result = await Product.findByPk(id, {
+export async function getById(itemId) {
+  const result = await Product.findOne({
+    where: { itemId },
     include: [{ model: Phone }],
   });
 
