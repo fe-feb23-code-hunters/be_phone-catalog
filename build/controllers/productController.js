@@ -18,6 +18,7 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const limit = parseInt(req.query.limit) || 10;
     const productCategory = req.query.category;
     const sortBy = req.query.sortBy;
+    const search = req.query.search;
     if (productCategory && !categories_constants_1.VALID_CATEGORIES.includes(productCategory)) {
         return res
             .status(400)
@@ -35,6 +36,7 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
             limit,
             productCategory,
             sortBy,
+            search,
         });
         const totalPages = Math.ceil(count / limit);
         if (page <= 0 || (page > totalPages && totalPages !== 0)) {

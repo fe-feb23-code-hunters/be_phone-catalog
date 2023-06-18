@@ -4,12 +4,26 @@ import { Product } from '../models/Product';
 import { ProductCategory } from '../types/productCategory';
 import { SortBy } from '../types/SortBy';
 
-export async function getAll({ offset, limit, productCategory, sortBy }) {
-  const where: { category?: ProductCategory } = {};
+export async function getAll({
+  offset,
+  limit,
+  productCategory,
+  sortBy,
+  search,
+}) {
+  const where: {
+    category?: ProductCategory;
+    name?: { [Op.iLike]: string }
+  } = {};
+
   let order: Array<[string, 'DESC' | 'ASC']> = [];
 
   if (productCategory) {
     where.category = productCategory;
+  }
+
+  if (search) {
+    where.name = { [Op.iLike]: `%${search}%` };
   }
 
   if (sortBy) {
@@ -37,12 +51,12 @@ export async function getAll({ offset, limit, productCategory, sortBy }) {
   }
 
   const { rows: rawProducts, count: totalCount }
-    = await Product.findAndCountAll({
-      where,
-      offset,
-      limit,
-      order,
-    });
+  = await Product.findAndCountAll({
+    where,
+    offset,
+    limit,
+    order,
+  });
 
   const products = rawProducts.map(({ dataValues }) => ({
     ...dataValues,
