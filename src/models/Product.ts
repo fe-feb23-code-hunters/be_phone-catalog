@@ -1,6 +1,7 @@
 import {
   AllowNull,
   BelongsTo,
+  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
@@ -8,7 +9,9 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
+import { Order } from './Order';
 import { Phone } from './Phone';
+import { ProductOrder } from './ProductOrder';
 
 @Table({
   tableName: 'products',
@@ -19,7 +22,7 @@ export class Product extends Model {
   @PrimaryKey
   @AllowNull(false)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
   })
     id: string;
 
@@ -98,4 +101,7 @@ export class Product extends Model {
     type: DataType.STRING,
   })
     image: string;
+
+  @BelongsToMany(() => Order, () => ProductOrder)
+    orders: Order[];
 }
