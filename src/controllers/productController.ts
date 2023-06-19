@@ -52,6 +52,7 @@ export const getAllProducts = async(req, res) => {
       products,
       page,
       totalPages,
+      totalCount: count,
     });
   } catch (error) {
     // eslint-disable-next-line no-console

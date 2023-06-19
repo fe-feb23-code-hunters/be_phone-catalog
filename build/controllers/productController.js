@@ -48,6 +48,7 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
             products,
             page,
             totalPages,
+            totalCount: count,
         });
     }
     catch (error) {
