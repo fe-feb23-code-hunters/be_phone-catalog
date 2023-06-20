@@ -4,6 +4,9 @@ import { Product } from './models/Product';
 import dbInit from './utils/dbInit';
 import fs from 'fs';
 import path from 'path';
+import { User } from './models/User';
+import { Order } from './models/Order';
+import { ProductOrder } from './models/ProductOrder';
 
 const seedInitialPhones = async() => {
   try {
@@ -54,14 +57,15 @@ const seedInitialProducts = async() => {
   }
 };
 
-const sync = async() => {
+export const sync = async() => {
   dbInit();
 
   await Phone.sync({ alter: true });
   await Product.sync({ alter: true });
+  await User.sync({ alter: true, force: true });
+  await Order.sync({ alter: true, force: true });
+  await ProductOrder.sync({ alter: true, force: true });
 
   await seedInitialPhones();
   await seedInitialProducts();
 };
-
-sync();
