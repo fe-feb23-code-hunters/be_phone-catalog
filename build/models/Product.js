@@ -8,14 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
+const Order_1 = require("./Order");
 const Phone_1 = require("./Phone");
+const ProductOrder_1 = require("./ProductOrder");
 let Product = exports.Product = class Product extends sequelize_typescript_1.Model {
 };
 __decorate([
     sequelize_typescript_1.PrimaryKey,
     (0, sequelize_typescript_1.AllowNull)(false),
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER,
+        type: sequelize_typescript_1.DataType.STRING,
     })
 ], Product.prototype, "id", void 0);
 __decorate([
@@ -94,6 +96,9 @@ __decorate([
         type: sequelize_typescript_1.DataType.STRING,
     })
 ], Product.prototype, "image", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsToMany)(() => Order_1.Order, () => ProductOrder_1.ProductOrder)
+], Product.prototype, "orders", void 0);
 exports.Product = Product = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'products',

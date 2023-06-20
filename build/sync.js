@@ -12,12 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.sync = void 0;
 /* eslint-disable no-console */
 const Phone_1 = require("./models/Phone");
 const Product_1 = require("./models/Product");
 const dbInit_1 = __importDefault(require("./utils/dbInit"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const User_1 = require("./models/User");
+const Order_1 = require("./models/Order");
+const ProductOrder_1 = require("./models/ProductOrder");
 const seedInitialPhones = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const phonesFolderPath = path_1.default.join(__dirname, '..', 'public', 'api', 'phones');
@@ -51,7 +55,10 @@ const sync = () => __awaiter(void 0, void 0, void 0, function* () {
     (0, dbInit_1.default)();
     yield Phone_1.Phone.sync({ alter: true });
     yield Product_1.Product.sync({ alter: true });
+    yield User_1.User.sync({ alter: true, force: true });
+    yield Order_1.Order.sync({ alter: true, force: true });
+    yield ProductOrder_1.ProductOrder.sync({ alter: true, force: true });
     yield seedInitialPhones();
     yield seedInitialProducts();
 });
-sync();
+exports.sync = sync;
