@@ -6,8 +6,14 @@ export const createUser = async(email: string, password: string) => {
   return user;
 };
 
-export const getUser = async(email: string) => {
+export const getUserByEmail = async(email: string) => {
   const user = await User.findOne({ where: { email } });
+
+  return user;
+};
+
+export const getUserById = async(userId: number) => {
+  const user = await User.findOne({ where: { id: userId } });
 
   return user;
 };

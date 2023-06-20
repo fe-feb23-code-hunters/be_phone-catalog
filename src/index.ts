@@ -4,6 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import dbInit from './utils/dbInit';
 import authRouter from './routes/authRouter';
+import ordersRouter from './routes/ordersRouter';
 
 require('dotenv').config();
 
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 
 app.use('/products', productRouter);
 app.use('/auth', authRouter);
+app.use('/orders', ordersRouter);
 
 app.get('/', (_req, res) => {
   res.send('Hello World, from express');

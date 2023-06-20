@@ -1,4 +1,8 @@
-import { createUser, getUser, updateUser } from '../servises/authService';
+import {
+  createUser,
+  getUserByEmail,
+  updateUser,
+} from '../servises/authService';
 import { hash, genSalt, compare } from 'bcryptjs';
 import { generateRandomPassword } from '../utils/generatePassword';
 import nodemailer from 'nodemailer';
@@ -20,7 +24,7 @@ export const signUp = async(req, res) => {
       .send('The password length should be at least 8 symbols');
   }
 
-  const checkedUser = await getUser(email);
+  const checkedUser = await getUserByEmail(email);
 
   if (checkedUser) {
     return res.status(400).send('The user is already signed up');
@@ -48,7 +52,7 @@ export const logIn = async(req, res) => {
   }
 
   try {
-    const checkedUser = await getUser(email);
+    const checkedUser = await getUserByEmail(email);
 
     if (!checkedUser) {
       return res.status(404).send('There is no such user');
@@ -73,7 +77,7 @@ export const resetPassword = async(req, res) => {
     return res.sendStatus(400);
   }
 
-  const checkedUser = await getUser(email);
+  const checkedUser = await getUserByEmail(email);
 
   if (!checkedUser) {
     return res.status(404).send('There is no such user');
