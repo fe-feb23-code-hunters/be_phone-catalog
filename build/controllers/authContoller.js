@@ -62,7 +62,7 @@ const logIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!isPasswordValid) {
             return res.status(403).send('The password is wrong');
         }
-        return res.status(200).send({ isLoggedIn: true });
+        return res.status(200).send(checkedUser);
     }
     catch (error) {
         res.status(500).send('Something went wrong');
