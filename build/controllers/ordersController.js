@@ -39,11 +39,11 @@ const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.getAllOrders = getAllOrders;
 const postOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.body.userId;
-    const productIds = req.body.productIds;
+    const products = req.body.products;
     if (!userId) {
         return res.status(400).send('The user id is invalid');
     }
-    if (!productIds.length) {
+    if (!products.length) {
         return res
             .status(400)
             .send('You should have at least 1 product to post an order');
@@ -53,7 +53,7 @@ const postOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!user) {
             return res.status(400).send('There is no such user');
         }
-        const order = yield (0, ordersService_1.createOrder)(userId, productIds);
+        const order = yield (0, ordersService_1.createOrder)(userId, products);
         if (!order) {
             return res.status(400).send('Not able to post an order');
         }

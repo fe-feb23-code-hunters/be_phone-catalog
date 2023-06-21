@@ -34,6 +34,12 @@ __decorate([
 __decorate([
     (0, sequelize_typescript_1.BelongsTo)(() => Order_1.Order)
 ], ProductOrder.prototype, "order", void 0);
+__decorate([
+    (0, sequelize_typescript_1.AllowNull)(false),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+    })
+], ProductOrder.prototype, "count", void 0);
 exports.ProductOrder = ProductOrder = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'product_orders',
