@@ -18,7 +18,7 @@ export const signUp = async(req, res) => {
     return res.sendStatus(400);
   }
 
-  if (password.length <= 8) {
+  if (password.length < 8) {
     return res
       .status(400)
       .send('The password length should be at least 8 symbols');
