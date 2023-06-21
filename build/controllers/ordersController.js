@@ -23,9 +23,6 @@ const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             return res.status(400).send('There is no such user');
         }
         const orders = yield (0, ordersService_1.getUserOrders)(userId);
-        if (!orders.length) {
-            return res.status(400).send('No orders yet');
-        }
         return res.json({
             orders,
         });
