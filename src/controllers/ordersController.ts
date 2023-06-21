@@ -18,10 +18,6 @@ export const getAllOrders = async(req, res) => {
 
     const orders = await getUserOrders(userId);
 
-    if (!orders.length) {
-      return res.status(400).send('No orders yet');
-    }
-
     return res.json({
       orders,
     });
