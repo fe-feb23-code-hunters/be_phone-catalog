@@ -38,4 +38,10 @@ export class ProductOrder extends Model {
 
   @BelongsTo(() => Order)
     order: Order;
+
+  @AllowNull(false)
+  @Column({
+    type: DataType.INTEGER,
+  })
+    count: number;
 }

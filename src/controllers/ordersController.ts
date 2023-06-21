@@ -35,13 +35,13 @@ export const getAllOrders = async(req, res) => {
 
 export const postOrder = async(req, res) => {
   const userId = req.body.userId;
-  const productIds = req.body.productIds;
+  const products = req.body.products;
 
   if (!userId) {
     return res.status(400).send('The user id is invalid');
   }
 
-  if (!productIds.length) {
+  if (!products.length) {
     return res
       .status(400)
       .send('You should have at least 1 product to post an order');
@@ -54,7 +54,7 @@ export const postOrder = async(req, res) => {
       return res.status(400).send('There is no such user');
     }
 
-    const order = await createOrder(userId, productIds);
+    const order = await createOrder(userId, products);
 
     if (!order) {
       return res.status(400).send('Not able to post an order');
